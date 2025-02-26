@@ -12,17 +12,16 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  pokemon:any = {
-    nome: null,
-    poder: null
-  };
+  filter: string = `fields=name,borders,flags`
+  url: string = `https://restcountries.com/v3.1/all?${this.filter}`;
 
-  constructor( 
-    public crudService: CrudService
-  ){ }
-
-  enviar() {
-    this.crudService.insert(this.pokemon, 'pokemons');
+  constructor( ){ 
+    fetch('this.url')
+    .then(dados => dados.json())
+    .then(dados =>{ console.log(dados);
+    })
+    .catch()
+    .finally()
   }
 
 }
