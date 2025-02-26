@@ -12,16 +12,26 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  filter: string = `fields=name,borders,flags`
+  filter: string = `fields=name,border,flags`;
   url: string = `https://restcountries.com/v3.1/all?${this.filter}`;
+  dados: any = {};
+  is_loading: boolean = false;
 
   constructor( ){ 
-    fetch('this.url')
+    this.is_loading = true
+
+    fetch(this.url)
     .then(dados => dados.json())
-    .then(dados =>{ console.log(dados);
+    .then(dados => {
+      console.log(dados);
+      this.dados = dados;
     })
-    .catch()
-    .finally()
+    .catch(_ =>{
+      console.log(_);
+    })
+    .finally(()=>{
+      console.log('Requisiçao Finalizado');
+    })
   }
 
 }
